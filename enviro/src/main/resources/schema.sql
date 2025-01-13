@@ -1,0 +1,5 @@
+
+CREATE TABLE IF NOT EXISTS `waste` (
+ `id` int AUTO_INCREMENT,
+ PRIMARY KEY (`id`)
+);
