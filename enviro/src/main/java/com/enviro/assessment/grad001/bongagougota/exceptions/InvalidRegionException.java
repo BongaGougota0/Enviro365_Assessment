@@ -7,8 +7,8 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import java.util.Arrays;
 
 @ResponseStatus(HttpStatus.BAD_REQUEST)
-public class InvalidRegionException extends IllegalArgumentException{
-    public InvalidRegionException(Exception exception){
-        super(exception.getMessage());
+public class InvalidRegionException extends Exception{
+    public InvalidRegionException(String message){
+        super(message);
     }
 }

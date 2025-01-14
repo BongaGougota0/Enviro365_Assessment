@@ -31,8 +31,8 @@ public class WasteExceptionHandler {
 
     @ExceptionHandler({InvalidRegionException.class})
     public ResponseEntity<ErrorResponse> invalidRegionExceptionHandler(Exception ex){
-        ErrorResponse error = new ErrorResponse(ex.getMessage(),
-                " Accepted Waste Category values " + Arrays.toString(WasteCategory.values()), LocalDateTime.now());
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(error);
+        ErrorResponse error = new ErrorResponse(" Accepted Waste Category values " + Arrays.toString(WasteCategory.values()),
+                "400", LocalDateTime.now());
+        return ResponseEntity.badRequest().body(error);
     }
 }

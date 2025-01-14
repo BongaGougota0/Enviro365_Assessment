@@ -1,14 +1,10 @@
 package com.enviro.assessment.grad001.bongagougota.controller;
 
-import com.enviro.assessment.grad001.bongagougota.exceptions.InvalidRegionException;
-import com.enviro.assessment.grad001.bongagougota.model.Guideline;
 import com.enviro.assessment.grad001.bongagougota.service.GuidelineService;
 import com.enviro.assessment.grad001.bongagougota.service.RecyclingTipsService;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.ArrayList;
 
 

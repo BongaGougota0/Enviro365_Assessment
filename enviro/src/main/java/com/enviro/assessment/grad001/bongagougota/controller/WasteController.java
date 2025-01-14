@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.ArrayList;
 
 @RestController
-@RequestMapping(path="/api/waste/", produces = MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping(path="/api/waste", produces = MediaType.APPLICATION_JSON_VALUE)
 public class WasteController {
     WasteService wasteService;
 
@@ -18,13 +18,13 @@ public class WasteController {
         this.wasteService = wasteService;
     }
 
-    @PostMapping("")
+    @PostMapping("/post")
     public ResponseEntity<Waste> createWaste(@Valid @RequestBody Waste waste) {
         Waste waste1 = wasteService.saveWasteObject(waste);
         return ResponseEntity.ok().body(waste1);
     }
 
-    @GetMapping( "all")
+    @GetMapping( "/all")
     public ResponseEntity<ArrayList<Waste>> getAllWaste() {
         ArrayList<Waste> wasteArrayList = wasteService.getAllWastes();
         if (wasteArrayList.isEmpty()) {
@@ -33,19 +33,19 @@ public class WasteController {
         return ResponseEntity.ok().body(wasteArrayList);
     }
 
-    @PutMapping("update")
+    @PutMapping("/update")
     public ResponseEntity<?> updateWaste(@RequestBody Waste waste) {
         Waste updatedWasteObject = wasteService.updateWasteObject(waste);
         return ResponseEntity.ok().body(updatedWasteObject);
     }
 
-    @GetMapping("{wasteId}")
+    @GetMapping("/{wasteId}")
     public ResponseEntity<Waste> getWaste(@PathVariable int wasteId) {
         Waste waste = wasteService.getWasteById(wasteId);
         return ResponseEntity.ok().body(waste);
     }
 
-    @DeleteMapping("delete/{wasteId}")
+    @DeleteMapping("/delete/{wasteId}")
     public ResponseEntity<Waste> deleteWaste(@PathVariable int wasteId) {
         Waste waste = wasteService.deleteWasteById(wasteId);
         return ResponseEntity.ok().body(waste);

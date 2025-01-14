@@ -5,4 +5,6 @@ public enum WasteCategory {
     COMMERCIAL_WASTE,
     AGRICULTURAL_WASTE,
     DOMESTIC_WASTE,
+    HAZARDOUS_WASTE,
+    RECYCLABLE_WASTE,
 }
