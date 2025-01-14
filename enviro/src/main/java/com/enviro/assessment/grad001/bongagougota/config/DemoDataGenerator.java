@@ -19,9 +19,9 @@ import java.util.Random;
 @Component
 public class DemoDataGenerator {
     Random random = new Random();
-    private RecyclingTipsRepository recyclingTipsRepository;
-    private GuidelineRepository guidelineRepository;
-    private WasteRepository wasteRepository;
+    private final RecyclingTipsRepository recyclingTipsRepository;
+    private final GuidelineRepository guidelineRepository;
+    private final WasteRepository wasteRepository;
 
     public static final String[] WASTE_TITLES = new String[]{"Recycling", "Composting", "Landfilling", "Anaerobic", "Digestion",
             "Waste Segregation", "Biological Treatment", "Mechanical","Waste Minimization", "Thermal Treatment", "Energy Recovery"};

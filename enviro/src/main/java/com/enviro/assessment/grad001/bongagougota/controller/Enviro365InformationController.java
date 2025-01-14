@@ -9,7 +9,7 @@ import java.util.ArrayList;
 
 
 @RestController
-@RequestMapping(path="/api/info/", produces= MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping(path="/api/info", produces= MediaType.APPLICATION_JSON_VALUE)
 public class Enviro365InformationController {
     private final GuidelineService guidelineService;
     private final RecyclingTipsService recyclingTipsService;
@@ -19,7 +19,7 @@ public class Enviro365InformationController {
         this.recyclingTipsService = recyclingTipsService;
     }
 
-    @GetMapping("categories")
+    @GetMapping("/categories")
     public ResponseEntity<ArrayList<String>> getCategories() {
         return ResponseEntity.ok().body(guidelineService.getGuidelineCategories());
     }

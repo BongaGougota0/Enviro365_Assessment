@@ -1,5 +1,6 @@
 package com.enviro.assessment.grad001.bongagougota.controller;
 
+import com.enviro.assessment.grad001.bongagougota.dto.Response;
 import com.enviro.assessment.grad001.bongagougota.model.Waste;
 import com.enviro.assessment.grad001.bongagougota.service.WasteService;
 import jakarta.validation.Valid;
@@ -7,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 @RestController
@@ -34,7 +36,7 @@ public class WasteController {
     }
 
     @PutMapping("/update")
-    public ResponseEntity<?> updateWaste(@RequestBody Waste waste) {
+    public ResponseEntity<Waste> updateWaste(@RequestBody Waste waste) {
         Waste updatedWasteObject = wasteService.updateWasteObject(waste);
         return ResponseEntity.ok().body(updatedWasteObject);
     }
@@ -46,8 +48,11 @@ public class WasteController {
     }
 
     @DeleteMapping("/delete/{wasteId}")
-    public ResponseEntity<Waste> deleteWaste(@PathVariable int wasteId) {
-        Waste waste = wasteService.deleteWasteById(wasteId);
-        return ResponseEntity.ok().body(waste);
+    public ResponseEntity<Response> deleteWaste(@PathVariable int wasteId) {
+        boolean isDeleted = wasteService.deleteWasteById(wasteId);
+        if (isDeleted) {
+            return ResponseEntity.ok().body(new Response("deleted","204", LocalDateTime.now()));
+        }
+        return ResponseEntity.ok().body(new Response("error","404", LocalDateTime.now()));
     }
 }

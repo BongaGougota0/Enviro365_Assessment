@@ -1,4 +1,4 @@
-package com.enviro.assessment.grad001.bongagougota.model;
+package com.enviro.assessment.grad001.bongagougota.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

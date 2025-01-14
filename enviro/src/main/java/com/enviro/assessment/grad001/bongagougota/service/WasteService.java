@@ -34,17 +34,14 @@ public class WasteService {
     }
 
     public Waste getWasteById(int wasteId) {
-        return wasteRepository.findById(wasteId).map( wasteObj ->{
-            return wasteObj;
-        }).orElseThrow(() -> new ResourceNotFoundException(String.format("Waste data with id %s not found.", wasteId)));
+        return wasteRepository.findById(wasteId)
+                .orElseThrow(() -> new ResourceNotFoundException(String.format("Waste data with id %s not found.", wasteId)));
     }
 
-    public Waste deleteWasteById(int wasteId) {
-        Waste deleteWasteObj =  wasteRepository.removeWasteById(wasteId);
-        if(deleteWasteObj != null) {
-            return deleteWasteObj;
-        }else {
-            throw new ResourceNotFoundException(String.format("Waste data with id %s not found.", wasteId));
-        }
+    public boolean deleteWasteById(int wasteId) {
+        Waste deleteWasteObj =  wasteRepository.findById(wasteId)
+                .orElseThrow(() -> new ResourceNotFoundException(String.format("Waste with id %s not found.", wasteId)));
+        wasteRepository.delete(deleteWasteObj);
+        return true;
     }
 }
