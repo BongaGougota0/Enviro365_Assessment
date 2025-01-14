@@ -1,9 +1,6 @@
 package com.enviro.assessment.grad001.bongagougota.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
@@ -16,6 +13,8 @@ public class Waste extends BaseEntity{
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "native")
     public int id;
 
+    @Enumerated(EnumType.STRING)
+    @NotBlank(message = "Waste category cannot be empty/null")
     public WasteCategory wasteCategory;
 
     @NotBlank(message="Waste description is required, this assists in identifying waste category.")

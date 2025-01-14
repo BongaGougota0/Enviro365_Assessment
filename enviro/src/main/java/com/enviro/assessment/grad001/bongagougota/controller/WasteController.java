@@ -2,6 +2,7 @@ package com.enviro.assessment.grad001.bongagougota.controller;
 
 import com.enviro.assessment.grad001.bongagougota.model.Waste;
 import com.enviro.assessment.grad001.bongagougota.service.WasteService;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -18,7 +19,7 @@ public class WasteController {
     }
 
     @PostMapping("")
-    public ResponseEntity<Waste> createWaste(@RequestBody Waste waste) {
+    public ResponseEntity<Waste> createWaste(@Valid @RequestBody Waste waste) {
         Waste waste1 = wasteService.saveWasteObject(waste);
         return ResponseEntity.ok().body(waste1);
     }
@@ -41,6 +42,12 @@ public class WasteController {
     @GetMapping("{wasteId}")
     public ResponseEntity<Waste> getWaste(@PathVariable int wasteId) {
         Waste waste = wasteService.getWasteById(wasteId);
+        return ResponseEntity.ok().body(waste);
+    }
+
+    @DeleteMapping("delete/{wasteId}")
+    public ResponseEntity<Waste> deleteWaste(@PathVariable int wasteId) {
+        Waste waste = wasteService.deleteWasteById(wasteId);
         return ResponseEntity.ok().body(waste);
     }
 }

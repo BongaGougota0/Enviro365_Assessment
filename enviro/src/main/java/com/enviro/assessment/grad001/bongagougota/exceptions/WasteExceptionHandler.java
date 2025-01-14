@@ -1,12 +1,14 @@
 package com.enviro.assessment.grad001.bongagougota.exceptions;
 
 import com.enviro.assessment.grad001.bongagougota.model.ErrorResponse;
+import com.enviro.assessment.grad001.bongagougota.model.WasteCategory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import java.time.LocalDateTime;
+import java.util.Arrays;
 
 @ControllerAdvice
 public class WasteExceptionHandler {
@@ -25,5 +27,12 @@ public class WasteExceptionHandler {
         ErrorResponse error = new ErrorResponse(ex.getMessage(),
                 HttpStatus.BAD_REQUEST.name(), LocalDateTime.now());
         return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler({InvalidRegionException.class})
+    public ResponseEntity<ErrorResponse> invalidRegionExceptionHandler(Exception ex){
+        ErrorResponse error = new ErrorResponse(ex.getMessage(),
+                " Accepted Waste Category values " + Arrays.toString(WasteCategory.values()), LocalDateTime.now());
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(error);
     }
 }
