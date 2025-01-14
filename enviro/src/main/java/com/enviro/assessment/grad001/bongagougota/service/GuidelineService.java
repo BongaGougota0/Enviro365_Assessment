@@ -1,11 +1,11 @@
 package com.enviro.assessment.grad001.bongagougota.service;
 
+import com.enviro.assessment.grad001.bongagougota.dto.GuidelineDto;
 import com.enviro.assessment.grad001.bongagougota.exceptions.InvalidRegionException;
 import com.enviro.assessment.grad001.bongagougota.exceptions.ResourceNotFoundException;
 import com.enviro.assessment.grad001.bongagougota.model.Guideline;
 import com.enviro.assessment.grad001.bongagougota.model.WasteCategory;
 import com.enviro.assessment.grad001.bongagougota.repository.GuidelineRepository;
-import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -42,14 +42,18 @@ public class GuidelineService {
         return guidelines;
     }
 
-    public Guideline createGuideline(Guideline guideline) throws InvalidRegionException {
-        try {
-            return guidelineRepository.save(guideline);
-        } catch (HttpMessageNotReadableException e) {
-            throw new InvalidRegionException(e);
-        } catch (Exception e) {
-            throw new RuntimeException(e);
+    public Guideline createGuideline(GuidelineDto guideline) throws InvalidRegionException {
+
+        if(Arrays.stream(WasteCategory.values()).anyMatch(
+                m -> m.name()
+                        .equalsIgnoreCase(guideline.getWasteCategory()))){
+            Guideline newGuideline = new Guideline();
+            newGuideline.setGuideLineTitle(guideline.getGuideLineTitle());
+            newGuideline.setGuideLineDescription(guideline.getGuideLineDescription());
+            newGuideline.setWasteCategory(WasteCategory.valueOf(guideline.getWasteCategory()));
+            return guidelineRepository.save(newGuideline);
         }
+        throw new InvalidRegionException("Accepted Waste Category values " + Arrays.toString(WasteCategory.values()));
     }
 
     public Guideline updateGuideline(Guideline guideline) {
