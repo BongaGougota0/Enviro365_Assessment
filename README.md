@@ -1,4 +1,4 @@
-# eTalente Techincal Enviro365_Assessment
+# eTalente Technical Enviro365_Assessment
 
 A Enviro365_Assessment REST API built with Spring Boot, API's documented with Swagger/OpenAPI.
 
@@ -62,7 +62,7 @@ The API documentation is available through Swagger UI at:
 http://localhost:8080/swagger-ui/index.html#/
 ```
 
-## API Endpoints for the following structure
+## API Endpoints follow the following structure
 
 - `GET      http://localhost:8080/api/{placeholder}/all` - Get all resources
 - `GET      http://localhost:8080/api/{placeholder}/{id}` - Get a specific resource
